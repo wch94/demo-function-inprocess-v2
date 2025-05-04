@@ -51,3 +51,13 @@ jobs:
           slot-name: 'Production'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
           
+      - name: Import API into API Management
+        shell: pwsh
+        run: |
+          az apim api import `
+            --resource-group demo-rg `
+            --service-name demoapimwch94 `
+            --api-id demofunctionapi95 `
+            --path demofunctionapi95 `
+            --specification-format OpenApi `
+            --specification-url "https://demofunctionapp95.azurewebsites.net/api/swagger.json"
